@@ -46,14 +46,17 @@ def setSystemVariablePath():
     sys.path.append(cudaLibPath)
 
 #Extract features from the pretrained model
-def extractFeatures(netModel, featureExtractionLayer, imgPatch):
+def extractFeatures(
+        netModel, featureExtractionLayer,
+        imgPatch):
     netModel.predict([imgPatch])
     featureVectors = netModel.blobs[featureExtractionLayer].data
     print "Feature vector dimensions: "np.shape(featureVectors.flatten())
     return featureVectors.flatten()
 
 #Load a saved model
-def loadModel(modelPath, modelName):
+def loadModel(modelPath,
+        modelName):
     model = joblib.load(modelPath + modelName, 'r')
     return model
 
